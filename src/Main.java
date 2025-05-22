@@ -56,7 +56,18 @@ public class Main {
                     String keyword = scanner.nextLine();
                     manager.searchTasks(keyword);
                 }
-                case 6 -> manager.sortTasksByDate();
+                case 6 -> {
+                    System.out.println("Сортувати за:");
+                    System.out.println("1. Дата");
+                    System.out.println("2. Назва");
+                    int sortChoice = Integer.parseInt(scanner.nextLine());
+
+                    switch (sortChoice) {
+                        case 1 -> manager.sortTasksByDate();
+                        case 2 -> manager.sortTasksByTitle();
+                        default -> System.out.println("Невірний вибір сортування.");
+                    }
+                }
                 case 0 -> running = false;
                 default -> System.out.println("Невірна опція.");
             }

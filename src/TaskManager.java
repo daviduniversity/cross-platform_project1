@@ -50,4 +50,11 @@ public class TaskManager {
                 .sorted(Comparator.comparing(Task::getDueDate))
                 .forEach(System.out::println);
     }
+
+    public void sortTasksByTitle() {
+        tasks.stream()
+                .sorted(Comparator.comparing(Task::getTitle))
+                .forEach(System.out::println);
+    }
+
 }
