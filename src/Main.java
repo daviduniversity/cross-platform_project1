@@ -14,7 +14,7 @@ public class Main {
             System.out.println("3. Видалити завдання");
             System.out.println("4. Оновити завдання");
             System.out.println("5. Пошук завдань");
-            System.out.println("6. Сортувати за датою");
+            System.out.println("6. Сортувати");
             System.out.println("0. Вихід");
             System.out.print("Ваш вибір: ");
 
@@ -52,9 +52,19 @@ public class Main {
                     manager.updateTask(id, title, desc, LocalDateTime.of(y, m, d, h, min), done);
                 }
                 case 5 -> {
+                    System.out.println("Пошук за:");
+                    System.out.println("1. Назвою");
+                    System.out.println("2. Описом");
+                    int searchChoice = Integer.parseInt(scanner.nextLine());
+
                     System.out.print("Ключове слово: ");
                     String keyword = scanner.nextLine();
-                    manager.searchTasks(keyword);
+
+                    switch (searchChoice) {
+                        case 1 -> manager.searchByTitle(keyword);
+                        case 2 -> manager.searchByDescription(keyword);
+                        default -> System.out.println("Невірний вибір пошуку.");
+                    }
                 }
                 case 6 -> {
                     System.out.println("Сортувати за:");

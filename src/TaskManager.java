@@ -38,11 +38,16 @@ public class TaskManager {
         System.out.println("Завдання не знайдено.");
     }
 
-    public void searchTasks(String keyword) {
-        List<Task> result = tasks.stream()
-                .filter(task -> task.getTitle().contains(keyword) || task.getDescription().contains(keyword))
-                .collect(Collectors.toList());
-        result.forEach(System.out::println);
+    public void searchByTitle(String keyword) {
+        tasks.stream()
+                .filter(task -> task.getTitle().toLowerCase().contains(keyword.toLowerCase()))
+                .forEach(System.out::println);
+    }
+
+    public void searchByDescription(String keyword) {
+        tasks.stream()
+                .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                .forEach(System.out::println);
     }
 
     public void sortTasksByDate() {
