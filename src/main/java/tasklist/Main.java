@@ -1,10 +1,14 @@
+package tasklist;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         TaskManager manager = new TaskManager();
+        manager.loadFromFile("tasks.json");
+
+        Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
         while (running) {
@@ -15,6 +19,7 @@ public class Main {
             System.out.println("4. Оновити завдання");
             System.out.println("5. Пошук завдань");
             System.out.println("6. Сортувати");
+            System.out.println("7. Позначити завдання як виконане");
             System.out.println("0. Вихід");
             System.out.print("Ваш вибір: ");
 
@@ -78,7 +83,15 @@ public class Main {
                         default -> System.out.println("Невірний вибір сортування.");
                     }
                 }
-                case 0 -> running = false;
+                case 7 -> {
+                    System.out.print("ID завдання, яке виконано: ");
+                    int id = Integer.parseInt(scanner.nextLine());
+                    manager.markTaskAsCompleted(id);
+                }
+                case 0 -> {
+                    manager.saveToFile("tasks.json");
+                    running = false;
+                }
                 default -> System.out.println("Невірна опція.");
             }
         }
